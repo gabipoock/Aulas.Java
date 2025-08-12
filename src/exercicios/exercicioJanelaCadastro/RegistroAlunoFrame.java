@@ -33,7 +33,7 @@ public class RegistroAlunoFrame extends JFrame {
 
         JLabel nomeLabel = new JLabel("Nome:");
         nomeLabel.setFont(fonteLabels);
-        nomeLabel.setBorder(BorderFactory.createEmptyBorder(0, 20, 0, 0)); // margem esquerda
+        nomeLabel.setBorder(BorderFactory.createEmptyBorder(0, 20, 0, 0)); 
 
         JLabel idadeLabel = new JLabel("Idade:");
         idadeLabel.setFont(fonteLabels);
@@ -91,7 +91,7 @@ public class RegistroAlunoFrame extends JFrame {
             Graphics2D g2 = (Graphics2D) g.create();
             g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
             g2.setColor(getBackground());
-            g2.fillRoundRect(0, 0, getWidth(), getHeight(), 30, 30); // raio das bordas
+            g2.fillRoundRect(0, 0, getWidth(), getHeight(), 30, 30); 
             super.paintComponent(g2);
             g2.dispose();
         }
@@ -99,8 +99,8 @@ public class RegistroAlunoFrame extends JFrame {
     botao.setBackground(Color.decode("#ADD8E6"));
     botao.setFont(new Font("Arial", Font.BOLD, 14));
     botao.setFocusPainted(false);
-    botao.setBorder(BorderFactory.createEmptyBorder(10, 15, 10, 15)); // espaçamento interno
-    botao.setContentAreaFilled(false); // necessário para custom paint
+    botao.setBorder(BorderFactory.createEmptyBorder(10, 15, 10, 15)); 
+    botao.setContentAreaFilled(false); 
     botao.setOpaque(false);
     botao.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
