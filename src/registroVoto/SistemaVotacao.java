@@ -1,6 +1,8 @@
 package registroVoto;
 
 import java.awt.*;
+import java.io.BufferedWriter;
+
 import javax.swing.*;
 
 public class SistemaVotacao extends JFrame {
@@ -80,12 +82,13 @@ public class SistemaVotacao extends JFrame {
                 break;
         }
         labelResultado.setText("Votos: A = " + votos[0] + ", B = " + votos[1] + ", C = " + votos[2] + ", D = " + votos[3]);
-        } else {
-            JOptionPane.showMessageDialog(null,
-            "Voto registrado com sucesso!",
-            "Resultados", JOptionPane.INFORMATION_MESSAGE);
-        }
+
+        JOptionPane.showMessageDialog(null,
+        "Voto registrado com sucesso!",
+        "Resultados", JOptionPane.INFORMATION_MESSAGE);
+        
     }
+}
 
     private void exibirResultado() {
         String resultado = "Resultados:\n" +
@@ -98,14 +101,23 @@ public class SistemaVotacao extends JFrame {
     }
 
     private void encerrarVotacao() {
-        String resultado = "Resultados Finais:\n" +
-                "Candidato A: " + votos[0] + "\n" +
-                "Candidato B: " + votos[1] + "\n" +
-                "Candidato C: " + votos[2] + "\n" +
-                "Candidato D: " + votos[3];
-        JOptionPane.showMessageDialog(this, resultado, "Encerramento da Votação",
-        JOptionPane.INFORMATION_MESSAGE);
-        System.exit(0);
+        try (BufferedWriter gravar = new BufferedWriter(new java.io.FileWriter("resultado.txt"))) {
+
+            gravar.write("Resultados Finais:\n Candidato A: " + votos[0] + "\n" +
+                    "Candidato B: " + votos[1] + "\n" +
+                    "Candidato C: " + votos[2] + "\n" +
+                    "Candidato D: " + votos[3]);
+
+                    labelResultado.setText("A = 0, B = 0, C = 0, D = 0");
+                    JOptionPane.showMessageDialog(null,
+                    "Encerramento da Votação. Votos salvos!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao salvar os resultados: " + e.getMessage(),
+                    "Erro", JOptionPane.ERROR_MESSAGE);
+        } finally {
+            System.exit(0); // Encerra o programa
+        }
     }
 
     public static void main(String[] args) {
